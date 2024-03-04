@@ -1,24 +1,47 @@
-
+// Get the button element by its id
 var button = document.getElementById("switch-button");
 
-var mode = "light";
+// Function to generate a random color
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
+// Function to update frame color
+function updateFrameColor() {
+  var img = document.querySelector("img");
+  var randomFrameColor = getRandomColor();
+  img.style.borderColor = randomFrameColor;
+}
+
+// Add a click event listener to the button
 button.addEventListener("click", function() {
+  // Get the body element
   var body = document.body;
 
-  if (mode === "light") {
-    // Mode to Dark
-    mode = "dark";
+  // Get all the elements that contain text
+  var textElements = document.querySelectorAll("h1,h2, h3, ul, li, p, span");
 
-    // Dark Mode GIF
-    body.style.backgroundImage = "url('https://media1.giphy.com/media/qTeiUJNlcoMe3LOMkk/giphy.gif?cid=ecf05e475cfhbotf1cihgxif1mslerua9wb4biu4j4pkyhbm&ep=v1_gifs_related&rid=giphy.gif&ct=g')";
+  // Generate random background and font colors
+  var randomBackgroundColor = getRandomColor();
+  var randomFontColor = getRandomColor();
 
-  } else {
-    // Mode to Light
-    mode = "light";
+  // Apply random colors to the body and text elements
+  body.style.backgroundColor = randomBackgroundColor;
 
-    // Light Mode GIF
-    body.style.backgroundImage = "url('https://media0.giphy.com/media/ddfb7PvwyzrepUhsdZ/giphy.gif?cid=ecf05e475cfhbotf1cihgxif1mslerua9wb4biu4j4pkyhbm&ep=v1_gifs_related&rid=giphy.gif&ct=g')";
-
+  for (var i = 0; i < textElements.length; i++) {
+    textElements[i].style.color = randomFontColor;
   }
+
+  // Apply random colors to the button
+  button.style.color = randomFontColor;
+  button.style.borderColor = randomFontColor;
+  button.style.backgroundColor = randomBackgroundColor;
+
+  // Update frame color
+  updateFrameColor();
 });
